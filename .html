@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Engraving Showcase</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #111;
+      color: white;
+      text-align: center;
+    }
+
+    .slideshow-container {
+      position: relative;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .slide {
+      display: none;
+      position: absolute;
+      width: 100%;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .material-text {
+      margin-top: 20px;
+      font-size: 1.5em;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slideshow-container">
+    <div class="slide active"><img src="images/item1.jpg"></div>
+    <div class="slide"><img src="images/item2.jpg"></div>
+    <div class="slide"><img src="images/item3.jpg"></div>
+    <div class="slide"><img src="images/item4.jpg"></div>
+    <div class="slide"><img src="images/item5.jpg"></div>
+  </div>
+
+  <div class="material-text" id="materialText">Wood</div>
+
+  <script>
+    const slides = document.querySelectorAll(".slide");
+    const materials = ["Wood", "Glass", "Acrylic", "Leather", "Metal"];
+    const materialText = document.getElementById("materialText");
+
+    let current = 0;
+    const interval = 5000; // 5 seconds
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+
+      // Fade out/in material text
+      materialText.style.opacity = 0;
+      setTimeout(() => {
+        materialText.textContent = materials[index];
+        materialText.style.opacity = 1;
+      }, 500);
+    }
+
+    setInterval(() => {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }, interval);
+  </script>
+
+</body>
+</html>
